@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
+import 'theme.data.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 var theme = darkTheme;
+int i=0;
 
-var darkTheme = ThemeData(
-  primarySwatch: Colors.red,
-  brightness: Brightness.dark,
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-);
 
-var lightTheme = ThemeData(
-  primarySwatch: Colors.green,
-  brightness: Brightness.light,
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-);
+
 
 class MyApp extends StatefulWidget {
   @override
@@ -55,21 +48,33 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       title: 'Flutter Themes',
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: HomePage(),
-    );
-  }
-}
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Flutter Themes"),
+        ),
+        body: Center(
+          child: Text("Hello World"),
+        ),
 
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Flutter Themes"),
-      ),
-      body: Center(
-        child: Text("Hello World"),
-      ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            setState(() {
+              if(i==0)
+                theme = darkOrangeTheme;
+              else if(i==1)
+                theme = darkTheme;
+              else
+                theme = lightTheme;
+              i++;
+              if(i==3)
+                i=0;
+            });
+          },
+          child: Icon(
+              Icons.brightness_4
+          ),
+        ),
+      )
     );
   }
 }
